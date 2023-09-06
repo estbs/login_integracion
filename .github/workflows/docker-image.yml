@@ -30,4 +30,3 @@ jobs:
     - name: Push Docker Image
       run: |
         docker push alopezgsource/login_integracion:1.3
-        docker push alopezgsource/login_integracion:latest
