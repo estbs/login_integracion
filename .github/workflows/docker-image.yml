@@ -24,15 +24,11 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
         
     - name: Build Docker Image
-      env:
-        NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
-        docker build -t $DOCKER_USER/login_integracion:$NEW_VERSION .
+        docker build -t $DOCKER_USER/login_integracion:1.3 .
         docker build -t $DOCKER_USER/login_integracion:latest .
         
     - name: Push Docker Image
-      env:
-        NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
-        docker push $DOCKER_USER/login_integracion:$NEW_VERSION
+        docker push $DOCKER_USER/login_integracion:1.3
         docker push $DOCKER_USER/login_integracion:latest
