@@ -4,6 +4,7 @@ jobs:
     docker:
       - image: alopezgsource/login_integracion:1.2
     steps:
+      - checkout
       - run:
           name: The First Step
           command: |
