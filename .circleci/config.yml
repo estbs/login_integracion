@@ -35,7 +35,8 @@ jobs:
           name: Create Imagen version
           command: |
             ls -la
-            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+            echo $DOCKERHUB_USERNAME
+            echo $DOCKERHUB_PASSWORD
 workflows:
   Pipeline-workflow:
     jobs:
