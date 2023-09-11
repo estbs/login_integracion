@@ -1,17 +1,39 @@
 version: 2.1
 jobs:
-  build:
+  Initial-setup:
+    docker:
+      - image: alopezgsource/login_integracion:1.2
+    steps:
+      - run:
+          name: Initial message
+          command: |
+            echo 'Continuos delivery and integration masterclass'
+            echo 'Starting pipeline'
+  Fetch-code:
     docker:
       - image: alopezgsource/login_integracion:1.2
     steps:
       - checkout
       - run:
-          name: The First Step
+          name: Getting the code
           command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
+            Repository files from Develop branch
+            ls -la
+  Get-python-version:
+    docker:
+      - image: alpine:3.17
+    steps:
       - run:
-          name: The Second Step
+          name: Get Python Version
           command: |
-            ls -al
-            echo '^^^The files in your repo^^^'
+            python -v
+workflows:
+  Pipeline-workflow:
+    jobs:
+      - Initial-setup
+      - Fetch-Code:
+          requires:
+            - Initial-setup
+      - Get-python-version:
+          requires:
+            - Fetch-Code
