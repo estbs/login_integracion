@@ -34,15 +34,13 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: to Dockerfile path
-          command: cd Integracion
-      - run:
           name: "What branch am I on?"
           command: echo ${CIRCLE_BRANCH}
       - run:
           name: Create new Imagen version
           command: |
             ls -la
+            cd Integracion
             echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
             docker build -t estebanbs/integracion-test:1.0.1 .
             docker push estebanbs/integracion-test:latest
