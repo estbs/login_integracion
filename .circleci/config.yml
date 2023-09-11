@@ -42,7 +42,7 @@ jobs:
             ls -la
             cd Integracion
             echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
-            docker build -t estebanbs/integracion-test:1.0.1 .
+            docker build -t estebanbs/integracion-test:latest .
             docker push estebanbs/integracion-test:latest
 workflows:
   Pipeline-workflow:
