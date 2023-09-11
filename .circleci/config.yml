@@ -27,7 +27,7 @@ jobs:
           name: Get Python Version
           command: |
             python3 --version
-  GeChecklask-version:
+  Check-flask-version:
     docker:
       - image: estebanbs/integracion-test:1.0.0
     steps:
