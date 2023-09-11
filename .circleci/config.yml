@@ -29,16 +29,13 @@ jobs:
             python3 --version
   Update-image:
     docker:
-      - image: estebanbs/integracion-test:1.0.0
+      - image: docker:latest
     steps:
-      - setup_remote_docker:
-          version: 20.10.14
-          docker_layer_caching: true
       - run:
           name: Create Imagen version
           command: |
+            ls -la
             docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
-            docker push estebanbs/integracion-test:1.0.1
 workflows:
   Pipeline-workflow:
     jobs:
