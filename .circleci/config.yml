@@ -34,6 +34,9 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
+          name: to Dockerfile path
+          command: cd Integracion
+      - run:
           name: "What branch am I on?"
           command: echo ${CIRCLE_BRANCH}
       - run:
