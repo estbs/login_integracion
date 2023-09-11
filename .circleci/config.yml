@@ -30,9 +30,11 @@ jobs:
   Update-image:
     docker:
       - image: estebanbs/integracion-test:1.0.0
+    resource_class: xlarge
     steps:
       - setup_remote_docker:
           version: 20.10.14
+          docker_layer_caching: true
       - run:
           name: Create Imagen version
           command: |
