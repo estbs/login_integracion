@@ -31,6 +31,8 @@ jobs:
     docker:
       - image: estebanbs/integracion-test:1.0.0
     steps:
+      - setup_remote_docker:
+          version: 20.10.14
       - run:
           name: Create Imagen version
           command: |
