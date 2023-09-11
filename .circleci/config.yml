@@ -36,10 +36,10 @@ jobs:
           name: "What branch am I on?"
           command: echo ${CIRCLE_BRANCH}
       - run:
-          name: Create Imagen version
+          name: Create new Imagen version
           command: |
-            ls -la
             docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+            docker push estebanbs/integracion-test:1.0.1
 workflows:
   Pipeline-workflow:
     jobs:
