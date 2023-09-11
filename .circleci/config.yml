@@ -27,6 +27,14 @@ jobs:
           name: Get Python Version
           command: |
             python3 --version
+  Get-flask-version:
+    docker:
+      - image: estebanbs/integracion-test:1.0.0
+    steps:
+      - run:
+          name: Get Flask Version
+          command: |
+            echo 'Get Flask version from app'
   Update-image:
     docker:
       - image: docker:latest
@@ -57,3 +65,6 @@ workflows:
       - Update-image:
           requires:
             - Fetch-code
+      - Get-flask-version:
+          requires:
+            - Get-python-version
