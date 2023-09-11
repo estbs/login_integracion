@@ -42,6 +42,7 @@ jobs:
       - run:
           name: Create new Imagen version
           command: |
+            ls -la
             echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
             docker build -t estebanbs/integracion-test:1.0.1 .
             docker push estebanbs/integracion-test:latest
