@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   Initial-setup:
     docker:
-      - image: alopezgsource/login_integracion:1.2
+      - image: estebanbs/integracion-test:1.0.0
     steps:
       - run:
           name: Initial message
@@ -11,7 +11,7 @@ jobs:
             echo 'Starting pipeline'
   Fetch-code:
     docker:
-      - image: alopezgsource/login_integracion:1.2
+      - image: estebanbs/integracion-test:1.0.0
     steps:
       - checkout
       - run:
@@ -21,12 +21,21 @@ jobs:
             ls -la
   Get-python-version:
     docker:
-      - image: alopezgsource/login_integracion:1.2
+      - image: estebanbs/integracion-test:1.0.0
     steps:
       - run:
           name: Get Python Version
           command: |
             python3 --version
+  Update-image:
+    docker:
+      - image: estebanbs/integracion-test:1.0.0
+    steps:
+      - run:
+          name: Create Imagen version
+          command: |
+            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+            docker push estebanbs/integracion-test:1.0.1
 workflows:
   Pipeline-workflow:
     jobs:
@@ -35,5 +44,8 @@ workflows:
           requires:
             - Initial-setup
       - Get-python-version:
+          requires:
+            - Fetch-code
+      - Update-image:
           requires:
             - Fetch-code
