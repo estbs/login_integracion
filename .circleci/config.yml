@@ -52,6 +52,14 @@ jobs:
           name: Run automation test
           command: |
             echo 'Running automation test'
+  Create-temp-instance:
+    docker:
+      - image: estebanbs/integracion-test:1.0.0
+    steps:
+      - run:
+          name: Create Temp Instance to Automation test
+          command: |
+            echo 'Creating temp instance'
   Notification-test-environment-updated:
     docker:
       - image: estebanbs/integracion-test:1.0.0
@@ -94,9 +102,12 @@ workflows:
       - Run-unit-test:
           requires:
             - Check-flask-version
-      - Run-automation-test:
+      - Create-temp-instance:
           requires:
             - Check-flask-version
+      - Run-automation-test:
+          requires:
+            - Create-temp-instance
       - Update-image:
           requires:
             - Run-unit-test
