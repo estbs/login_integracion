@@ -35,6 +35,32 @@ jobs:
           name: Get Flask Version
           command: |
             echo 'Get Flask version from app'
+  Run-unit-test:
+    docker:
+      - image: estebanbs/integracion-test:1.0.0
+    steps:
+      - checkout
+      - run:
+          name: Run unit test
+          command: |
+            echo 'Running unit test'
+  Run-automation-test:
+    docker:
+      - image: estebanbs/integracion-test:1.0.0
+    steps:
+      - run:
+          name: Run automation test
+          command: |
+            echo 'Running automation test'
+  Notification-test-environment-updated:
+    docker:
+      - image: estebanbs/integracion-test:1.0.0
+    steps:
+      - checkout
+      - run:
+          name: Send notification to team
+          command: |
+            echo 'Sending notification to team'
   Update-image:
     docker:
       - image: docker:latest
@@ -62,9 +88,19 @@ workflows:
       - Get-python-version:
           requires:
             - Fetch-code
-      - Update-image:
-          requires:
-            - Fetch-code
       - Get-flask-version:
           requires:
             - Get-python-version
+      - Run-unit-test:
+          requires:
+            - Get-flask-version
+      - Run-automation-test:
+          requires:
+            - Get-flask-version
+      - Update-image:
+          requires:
+            - Run-unit-test
+            - Run-automation-test
+      - Notification-test-environment-updated:
+          requires:
+            - Update-image
