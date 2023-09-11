@@ -17,7 +17,7 @@ jobs:
       - run:
           name: Getting the code
           command: |
-            Repository files from Develop branch
+            echo 'Repository files from Develop branch'
             ls -la
   Get-python-version:
     docker:
