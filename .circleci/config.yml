@@ -21,7 +21,7 @@ jobs:
             ls -la
   Get-python-version:
     docker:
-      - image: alpine:3.17
+      - image: alopezgsource/login_integracion:1.2
     steps:
       - run:
           name: Get Python Version
