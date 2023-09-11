@@ -19,7 +19,7 @@ jobs:
           command: |
             echo 'Repository files from Develop branch'
             ls -la
-  Get-python-version:
+  Check-python-version:
     docker:
       - image: estebanbs/integracion-test:1.0.0
     steps:
@@ -27,7 +27,7 @@ jobs:
           name: Get Python Version
           command: |
             python3 --version
-  Get-flask-version:
+  GeChecklask-version:
     docker:
       - image: estebanbs/integracion-test:1.0.0
     steps:
@@ -85,18 +85,18 @@ workflows:
       - Fetch-code:
           requires:
             - Initial-setup
-      - Get-python-version:
+      - Check-python-version:
           requires:
             - Fetch-code
-      - Get-flask-version:
+      - Check-flask-version:
           requires:
-            - Get-python-version
+            - Check-python-version
       - Run-unit-test:
           requires:
-            - Get-flask-version
+            - Check-flask-version
       - Run-automation-test:
           requires:
-            - Get-flask-version
+            - Check-flask-version
       - Update-image:
           requires:
             - Run-unit-test
