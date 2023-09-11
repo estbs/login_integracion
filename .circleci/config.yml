@@ -32,6 +32,7 @@ jobs:
       - image: docker:latest
     steps:
       - checkout
+      - setup_remote_docker
       - run:
           name: "What branch am I on?"
           command: echo ${CIRCLE_BRANCH}
@@ -39,7 +40,6 @@ jobs:
           name: Create new Imagen version
           command: |
             echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
-            systemctl status docker
             docker build -t estebanbs/integracion-test:1.0.1 .
             docker push estebanbs/integracion-test:latest
 workflows:
