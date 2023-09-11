@@ -69,6 +69,15 @@ jobs:
           name: Send notification to team
           command: |
             echo 'Sending notification to team'
+  Change-ticket-to-qa:
+    docker:
+      - image: estebanbs/integracion-test:1.0.0
+    steps:
+      - checkout
+      - run:
+          name: Change Ticket to QA
+          command: |
+            echo 'Passing ticket to QA'
   Update-image:
     docker:
       - image: docker:latest
@@ -112,6 +121,9 @@ workflows:
           requires:
             - Run-unit-test
             - Run-automation-test
+      - Change-ticket-to-qa:
+          requires:
+            - Update-image
       - Notification-test-environment-updated:
           requires:
             - Update-image
