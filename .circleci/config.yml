@@ -31,12 +31,16 @@ jobs:
     docker:
       - image: docker:latest
     steps:
+      - checkout
+      - run:
+          name: "What branch am I on?"
+          command: echo ${CIRCLE_BRANCH}
       - run:
           name: Create Imagen version
           command: |
             ls -la
-            echo $DOCKERHUB_USERNAME
-            echo $DOCKERHUB_PASSWORD
+            echo ${DOCKERHUB_USERNAME}
+            echo ${DOCKERHUB_PASSWORD}
 workflows:
   Pipeline-workflow:
     jobs:
