@@ -31,9 +31,9 @@ workflows:
   Pipeline-workflow:
     jobs:
       - Initial-setup
-      - Fetch-Code:
+      - Fetch-code:
           requires:
             - Initial-setup
       - Get-python-version:
           requires:
-            - Fetch-Code
+            - Fetch-code
